@@ -1,0 +1,10 @@
+import express from 'express';
+import path from 'path';
+import UserController from './controller/user.controller.js';
+const server = express();
+const userController = new UserController();
+server.use(express.static(path.join(path.resolve(), 'views')));
+server.set('view engine', 'ejs');
+server.set('views', path.join(path.resolve(), 'views'));
+server.get("/", userController.renderHomePage);
+server.listen(3000, () => console.log("server is listening on port 3000"));
